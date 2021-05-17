@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  pn:
+    build:
+      context: ./docker
+      args:
+      - HTTP_PROXY
+      - HTTPS_PROXY
+      - NO_PROXY
+    command: yarn serve
+    working_dir: /app/push-notification-example
+    tty: true
+    environment:
+    - LOCAL_USER_ID
+    ports:
+    - 8080:8080
+    - 8000:8000
+    volumes:
+    - .:/app:delegated
+    - home:/home/node
+
+volumes:
+  home:
